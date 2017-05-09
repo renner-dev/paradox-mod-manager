@@ -22,6 +22,7 @@ public class Mod implements Serializable{
         String supportedVersion = "";
         File path = null;
 
+        boolean isWorkshopMod = false;
         try {
             List<String> lines = Files.readAllLines(modFile.toPath());
             boolean tagsActive = false;
@@ -29,8 +30,11 @@ public class Mod implements Serializable{
                 line = BOM.removeUTF8BOM(line);
                 if (line.startsWith("name=")) {
                     name = line.substring(line.indexOf(("=\"")) + 2, line.length() - 1);
-                } else if (line.startsWith("path=")) {
-                    path = new File(modFile.getParentFile().getAbsolutePath() + "/../" + line.substring(line.indexOf(("=\"")) + 2, line.length() - 1));
+                } else if (line.startsWith("path=") || line.startsWith("archive=")) {
+                    String pathStr = line.substring(line.indexOf(("=\"")) + 2, line.length() - 1).trim();
+                    System.out.println(pathStr);
+                    isWorkshopMod = pathStr.endsWith(".zip");
+                    path = new File(pathStr.startsWith("mod") ? modFile.getParentFile().getAbsolutePath() + "/../" + pathStr : pathStr);
                 } else if (line.startsWith("tags={")) {
                     tagsActive = true;
                 } else if (line.startsWith("\t") && tagsActive) {
@@ -49,7 +53,7 @@ public class Mod implements Serializable{
 
         Mod mod = new Mod(name, path, tags, supportedVersion);
         mod.modFilePathName = "mod/" + modFile.getName();
-
+        mod.isWorkshopMod = isWorkshopMod;
         return mod;
     }
 
@@ -74,8 +78,10 @@ public class Mod implements Serializable{
     public List<Tag> tags;
     public String supportedVersion;
     public File path;
-    String modFilePathName;
+    public  String modFilePathName;
+    public boolean isWorkshopMod;
     public final BooleanProperty active = new SimpleBooleanProperty();
+    public Localisation localisation;
 
     public Mod(String name, File path, List<Tag> tags, String supportedVersion) {
         this.name = name;

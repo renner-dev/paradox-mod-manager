@@ -6,4 +6,5 @@ package dev.renner.backend.util;
 public class Constants {
 
     public static String MOD_MANAGER_SETTINGS_FOLDER_NAME = "ModManager";
+    public static String SEVEN_ZIP_PATH = "F:\\dev\\paradox-mod-manager\\7zip\\7za.exe";
 }

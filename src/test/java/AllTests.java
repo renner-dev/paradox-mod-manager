@@ -1,6 +1,9 @@
+import dev.renner.backend.Localisation;
 import dev.renner.backend.Mod;
 import dev.renner.backend.Tag;
 import org.junit.Test;
+
+import java.io.File;
 
 
 /**
@@ -26,5 +29,11 @@ public class AllTests {
             System.out.print("Supported version: " + mod.supportedVersion + "\n");
         }
 
+    }
+
+    @Test
+    public void TestLocalisation()
+    {
+        Localisation.parseFolder(new File("D:\\SteamLibrary\\steamapps\\common\\Stellaris\\localisation"));
     }
 }

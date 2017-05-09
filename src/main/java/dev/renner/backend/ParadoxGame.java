@@ -22,6 +22,7 @@ public enum ParadoxGame {
 
     public static ParadoxGame getByFoldername(String name) {
 
+        System.out.println("Searching steamid for game: " + name);
         for(ParadoxGame game : ParadoxGame.values())
         {
             if(game.folderName.equals(name))
