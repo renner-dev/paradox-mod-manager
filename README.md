@@ -1,1 +1,1 @@
-# paradox-mod-manager
+# paradox-mod-manager [![Build Status](https://travis-ci.org/RennerDev/paradox-mod-manager.svg?branch=master)](https://travis-ci.org/RennerDev/paradox-mod-manager)
